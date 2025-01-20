@@ -60,19 +60,17 @@ void usage(char *exename){
 int count_words(char *buff, int len, int str_len){
     int word_count = 0;
     int i = 0;
-    int in_word = 0; // Flag to track if we are currently inside a word
+    int in_word = 0; 
 
     if (buff == NULL) {
-        return -1; // Error if the buffer is NULL
+        return -1; 
     }
-    
-    //ensure we do not iterate past the end of the buffer
-    while(i < len && i < str_len){ //only iterate through the user string, not the padding
+    while(i < len && i < str_len){ 
         if (*(buff + i) == ' ') {
-            in_word = 0; // Reset the flag
+            in_word = 0; 
         } else if (in_word == 0) {
-            word_count++; // Count a new word
-            in_word = 1;  // Set the flag
+            word_count++; 
+            in_word = 1;  
         }
         i++;
     }
@@ -164,36 +162,37 @@ int main(int argc, char *argv[]){
             free(temp_buff);
             break;
         }
-      case 'w': {
-          int word_count = 0;
-          int start_index = -1;  // Start of the current word
-          int i = 0;
+     case 'w': {
+        int word_count = 0;
+        int start_index = -1;
+        int i = 0;
 
-          printf("Word Print\n");
-          printf("----------\n");
+        printf("Word Print\n");
+        printf("----------\n");
 
-          while (i < user_str_len) {  
-              if (*(buff + i) == ' ' || i == user_str_len - 1) {
-                  if (start_index != -1) {
-                      word_count++;
-                      int end_index = (*(buff + i) == ' ') ? i : i + 1;
-                      int length = end_index - start_index;
-                      printf("%d. ", word_count);
-                      for (int j = start_index; j < end_index; j++) {
-                          putchar(*(buff + j));
-                      }
-                      printf(" (%d)\n", length);
-                      start_index = -1;
-                  }
-              } else if (start_index == -1) {
-                  start_index = i;
-              }
-              i++;
-          }
+        for (i = 0; i <= user_str_len; i++) {
+            if (i == user_str_len || *(buff + i) == ' ') {
+                if (start_index != -1) {
+                    word_count++;
+                    printf("%d. ", word_count);
+                    
+                    for (int j = start_index; j < i; j++) {
+                        putchar(*(buff + j));
+                    }
+                    
+                    printf(" (%d)\n", i - start_index);
+                    
+                    start_index = -1;
+                }
+            }
+            else if (start_index == -1) {
+                start_index = i;
+            }
+        }
 
-          printf("Number of words returned: %d\n", word_count);
-          break;
-      }
+        printf("Number of words returned: %d\n", word_count);
+        break;
+    }
         case 'x': {
             if (argc != 5){
                 usage(argv[0]);
