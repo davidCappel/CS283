@@ -1,0 +1,10 @@
+Question 1: yes the externalization is is always good. It betters helps pinpoint where potential erros are when compiling the code and when you runt the testing
+
+Question 2: the main reason why the implementation would result in a bug is becausd of memory mangement in c and the fact that this code would result in a dangling pointer.
+
+Question 3: This is better for dealing eith the dangling pionter, but crreates another bug that gives back null
+
+Question 4:
+  a: The file size shows the logical size fo the file whish is designated by the highest offest.
+  b: Du shows the acutal disk usage, which is usualy 4kb as the minimum allocation unit. the student ids 1 2 and 63 all are within that 4kb block, however adding the 64 makes linux have to use another block and increase the disk usage.
+  
